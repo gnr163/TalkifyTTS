@@ -32,6 +32,7 @@ class TencentTtsEngine : AbstractTtsEngine() {
     companion object {
         const val ENGINE_ID = "tencent-tts"
         const val ENGINE_NAME = "腾讯语音合成"
+        const val DEFAULT_VOICE_ID = 101027
         private const val VOICE_NAME_SEPARATOR = "::"
 
         private const val MAX_TEXT_LENGTH = 300
@@ -177,7 +178,7 @@ class TencentTtsEngine : AbstractTtsEngine() {
             return
         }
 
-        val realVoiceId = extractRealVoiceName(tencentConfig.voiceId) ?: voiceIds.firstOrNull() ?: "101001"
+        val realVoiceId = extractRealVoiceName(tencentConfig.voiceId) ?: voiceIds.firstOrNull() ?: DEFAULT_VOICE_ID.toString()
         val sampleRate = getSampleRateForVoice(realVoiceId)
 
         logInfo("Starting synthesis: textLength=${text.length}, voiceId=$realVoiceId, sampleRate=$sampleRate, pitch=${params.pitch}, speechRate=${params.speechRate}")
@@ -330,7 +331,7 @@ class TencentTtsEngine : AbstractTtsEngine() {
 
         request.setCodec("pcm")
         request.setSampleRate(sampleRate)
-        request.setVoiceType(voiceId.toIntOrNull() ?: 101001)
+        request.setVoiceType(voiceId.toIntOrNull() ?: DEFAULT_VOICE_ID)
         request.setEnableSubtitle(false)
         request.setEmotionCategory("neutral")
         request.setEmotionIntensity(100)
@@ -484,7 +485,7 @@ class TencentTtsEngine : AbstractTtsEngine() {
         variant: String?,
         currentVoiceId: String?
     ): String {
-        val defaultVoice = voiceIds.firstOrNull() ?: "101001"
+        val defaultVoice = voiceIds.firstOrNull() ?: DEFAULT_VOICE_ID.toString()
         if (currentVoiceId != null && currentVoiceId.isNotBlank()) {
             return "$currentVoiceId$VOICE_NAME_SEPARATOR$lang"
         }
