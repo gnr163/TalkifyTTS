@@ -70,3 +70,10 @@
 -keep class com.tencent.cloud.stream.tts.FlowingSpeechSynthesizerResponse { *; }
 -keep class com.tencent.cloud.stream.tts.core.ws.CommonRequest { *; }
 -keepclassmembers class * extends com.tencent.cloud.stream.tts.core.ws.CommonRequest { *; }
+
+# ==================== JLayer MP3 解码库 ProGuard 规则 ====================
+# 修复 JLayer 在 Release 模式下崩溃的问题
+# 问题原因：R8/ProGuard 混淆或剔除了 JLayer 的核心类和资源文件
+
+# 保留 JLayer 所有类
+-keep class javazoom.** { *; }

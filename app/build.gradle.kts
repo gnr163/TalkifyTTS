@@ -48,6 +48,12 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packaging {
+        resources {
+            merges += "javazoom/**/*.ser"
+        }
+    }
 }
 
 kotlin {

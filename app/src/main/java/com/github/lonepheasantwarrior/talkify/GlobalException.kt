@@ -3,6 +3,8 @@ package com.github.lonepheasantwarrior.talkify
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.os.Process
 import com.github.lonepheasantwarrior.talkify.infrastructure.app.notification.TalkifyNotificationHelper
 import com.github.lonepheasantwarrior.talkify.service.TtsLogger
@@ -45,17 +47,19 @@ object TalkifyExceptionHandler : Thread.UncaughtExceptionHandler {
         val negativeButton = context.getString(R.string.crash_dialog_report)
 
         try {
-            AlertDialog.Builder(context)
-                .setTitle(title)
-                .setMessage(message)
-                .setPositiveButton(positiveButton) { _, _ ->
-                    restartApp(context)
-                }
-                .setNegativeButton(negativeButton) { _, _ ->
-                    TtsLogger.d("User chose to report crash", tag = TAG)
-                }
-                .setCancelable(false)
-                .show()
+            Handler(Looper.getMainLooper()).post {
+                AlertDialog.Builder(context)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton(positiveButton) { _, _ ->
+                        restartApp(context)
+                    }
+                    .setNegativeButton(negativeButton) { _, _ ->
+                        TtsLogger.d("User chose to report crash", tag = TAG)
+                    }
+                    .setCancelable(false)
+                    .show()
+            }
         } catch (e: Exception) {
             TtsLogger.e("Failed to show crash dialog", throwable = e, tag = TAG)
         }
