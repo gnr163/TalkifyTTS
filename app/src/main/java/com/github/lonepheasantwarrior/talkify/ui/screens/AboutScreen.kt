@@ -301,7 +301,7 @@ fun AboutScreen(
 
     if (showDonateSheet) {
         ModalBottomSheet(
-            onDismissRequest = { },
+            onDismissRequest = { showDonateSheet = false },
             sheetState = sheetState
         ) {
             Column(
