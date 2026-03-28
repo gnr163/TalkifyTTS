@@ -16,6 +16,8 @@
         <item>603003</item>
         <item>603004</item>
         <item>603005</item>
+        <item>603006</item>
+        <item>603007</item>
         <item>602003</item>
     </string-array>
     <string-array name="tencent_natural_tts_voice_display_names">
@@ -33,6 +35,8 @@
         <item>随和老李</item>
         <item>温柔小柠</item>
         <item>知心大林</item>
+        <item>沉稳青叔</item>
+        <item>邻家女孩</item>
         <item>爱小悠</item>
     </string-array>
     <string-array name="tencent_natural_tts_voice_scenarios">
@@ -51,8 +55,12 @@
         <item>聊天</item>
         <item>聊天</item>
         <item>聊天</item>
+        <item>聊天</item>
+        <item>聊天</item>
     </string-array>
     <string-array name="tencent_natural_tts_voice_languages">
+        <item>中英文</item>
+        <item>中英文</item>
         <item>中英文</item>
         <item>中英文</item>
         <item>中英文</item>
@@ -85,8 +93,12 @@
         <item>8k/16k/24k</item>
         <item>8k/16k/24k</item>
         <item>8k/16k/24k</item>
+        <item>8k/16k/24k</item>
+        <item>8k/16k/24k</item>
     </string-array>
     <string-array name="tencent_natural_tts_voice_emotions">
+        <item>中性</item>
+        <item>中性</item>
         <item>中性</item>
         <item>中性</item>
         <item>中性</item>
