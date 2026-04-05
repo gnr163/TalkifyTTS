@@ -68,6 +68,7 @@ import com.github.lonepheasantwarrior.talkify.domain.model.Qwen3TtsConfig
 import com.github.lonepheasantwarrior.talkify.domain.model.SeedTts2Config
 import com.github.lonepheasantwarrior.talkify.domain.model.TencentTtsConfig
 import com.github.lonepheasantwarrior.talkify.domain.model.TtsEngineRegistry
+import com.github.lonepheasantwarrior.talkify.domain.model.XiaoMiMimoConfig
 import com.github.lonepheasantwarrior.talkify.domain.repository.AppConfigRepository
 import com.github.lonepheasantwarrior.talkify.domain.repository.EngineConfigRepository
 import com.github.lonepheasantwarrior.talkify.domain.repository.VoiceInfo
@@ -366,6 +367,10 @@ fun MainScreen(
                                         val msConfig = savedConfig as? MicrosoftTtsConfig ?: MicrosoftTtsConfig()
                                         msConfig.copy(voiceId = selectedVoice?.voiceId ?: msConfig.voiceId)
                                     }
+                                    is XiaoMiMimoConfig -> {
+                                        val xmConfig = savedConfig as? XiaoMiMimoConfig ?: XiaoMiMimoConfig()
+                                        xmConfig.copy(voiceId = selectedVoice?.voiceId ?: xmConfig.voiceId)
+                                    }
                                     else -> savedConfig
                                 }
 
@@ -376,6 +381,7 @@ fun MainScreen(
                                             config.secretId.isNotBlank() && 
                                             config.secretKey.isNotBlank()
                                     is MicrosoftTtsConfig -> true
+                                    is XiaoMiMimoConfig -> config.apiKey.isNotBlank()
                                     else -> false
                                 }
 

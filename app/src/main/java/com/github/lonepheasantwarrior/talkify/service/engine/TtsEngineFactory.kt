@@ -11,11 +11,14 @@ import com.github.lonepheasantwarrior.talkify.infrastructure.engine.repo.SeedTts
 import com.github.lonepheasantwarrior.talkify.infrastructure.engine.repo.SeedTts2VoiceRepository
 import com.github.lonepheasantwarrior.talkify.infrastructure.engine.repo.TencentTtsConfigRepository
 import com.github.lonepheasantwarrior.talkify.infrastructure.engine.repo.TencentTtsVoiceRepository
+import com.github.lonepheasantwarrior.talkify.infrastructure.engine.repo.XiaoMiMimoTtsConfigRepository
+import com.github.lonepheasantwarrior.talkify.infrastructure.engine.repo.XiaoMiMimoTtsVoiceRepository
 import com.github.lonepheasantwarrior.talkify.service.TtsLogger
 import com.github.lonepheasantwarrior.talkify.service.engine.impl.MicrosoftTtsEngine
 import com.github.lonepheasantwarrior.talkify.service.engine.impl.Qwen3TtsEngine
 import com.github.lonepheasantwarrior.talkify.service.engine.impl.SeedTts2Engine
 import com.github.lonepheasantwarrior.talkify.service.engine.impl.TencentTtsEngine
+import com.github.lonepheasantwarrior.talkify.service.engine.impl.XiaoMiMimoTtsEngine
 
 /**
  * TTS 引擎工厂
@@ -116,6 +119,11 @@ object TtsEngineFactory {
                 createEngine = { MicrosoftTtsEngine() },
                 createConfigRepo = { ctx -> MicrosoftTtsConfigRepository(ctx) },
                 createVoiceRepo = { ctx -> MicrosoftTtsVoiceRepository(ctx) }
+            ),
+            XiaoMiMimoTtsEngine.ENGINE_ID to ComponentFactories(
+                createEngine = { XiaoMiMimoTtsEngine() },
+                createConfigRepo = { ctx -> XiaoMiMimoTtsConfigRepository(ctx) },
+                createVoiceRepo = { ctx -> XiaoMiMimoTtsVoiceRepository(ctx) }
             )
         ).also {
             TtsLogger.i("TtsEngineFactory: ${it.size} engines registered")
